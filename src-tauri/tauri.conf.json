@@ -45,8 +45,7 @@
       "infoPlist": "./Info.plist"
     },
     "resources": [
-      "resources/bible.db",
-      "resources/models/*"
+      "resources/bible.db"
     ],
     "icon": [
       "icons/32x32.png",
