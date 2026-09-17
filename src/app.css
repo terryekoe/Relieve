@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-serif: 'Newsreader', 'EB Garamond', Georgia, serif;
+
+    /* Semantic Tokens - Dark Mode (Default) */
+    --ui-bg-app: #09090b;
+    --ui-bg-header: #0e0e11;
+    --ui-bg-panel: #09090b;
+    --ui-bg-panel-secondary: #0b0b0e;
+    --ui-bg-surface: #121215;
+    --ui-bg-surface-elevated: #18181b;
+    --ui-bg-surface-active: #27272a;
+    --ui-bg-input: #09090b;
+    --ui-border-subtle: #232326;
+    --ui-border-default: #2e2e32;
+    --ui-border-strong: #3f3f46;
+    --ui-text-primary: #f4f4f5;
+    --ui-text-secondary: #a1a1aa;
+    --ui-text-muted: #71717a;
+    --ui-text-dim: #52525b;
+  }
+
+  .theme-light, [data-theme="light"] {
+    /* Semantic Tokens - Modern Warm Stone & Linen Light Mode */
+    --ui-bg-app: #f7f5f0;
+    --ui-bg-header: #ffffff;
+    --ui-bg-panel: #ffffff;
+    --ui-bg-panel-secondary: #faf8f5;
+    --ui-bg-surface: #ffffff;
+    --ui-bg-surface-elevated: #f3efe7;
+    --ui-bg-surface-active: #e6dfd1;
+    --ui-bg-input: #ffffff;
+    --ui-border-subtle: #e5dfd3;
+    --ui-border-default: #d4ccbe;
+    --ui-border-strong: #aba191;
+    --ui-text-primary: #1c1917;
+    --ui-text-secondary: #57534e;
+    --ui-text-muted: #78716c;
+    --ui-text-dim: #a8a29e;
+  }
+
+  body {
+    background-color: var(--ui-bg-app);
+    color: var(--ui-text-primary);
+    font-family: var(--font-sans);
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+.theme-light ::-webkit-scrollbar-thumb {
+  background: #d4ccbe;
+}
+.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: #aba191;
+}
+
+/* =========================================================================
+   LIGHT THEME INTERFACE OVERRIDES
+   Comprehensive styling for all panels, cards, inputs, buttons, and empty states
+   while strictly isolating `.projection-canvas` (second screen / live preview)
+   ========================================================================= */
+
+.theme-light {
+  background-color: var(--ui-bg-app) !important;
+  color: var(--ui-text-primary) !important;
+}
+
+/* Header & Dock */
+.theme-light header,
+.theme-light nav {
+  background-color: var(--ui-bg-header) !important;
+  border-color: var(--ui-border-subtle) !important;
+}
+
+/* Studio Panels & Grid Columns */
+.theme-light main > div {
+  background-color: var(--ui-bg-panel) !important;
+  border-color: var(--ui-border-subtle) !important;
+}
+
+/* All dark hex backgrounds */
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="bg-\[\#0"] {
+  background-color: var(--ui-bg-panel) !important;
+}
+
+/* All neutral backgrounds (including opacity /20, /30, /40, /50, /60, /70, /80, /90) */
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="bg-neutral-950"] {
+  background-color: var(--ui-bg-surface-elevated) !important;
+}
+
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="bg-neutral-900"] {
+  background-color: var(--ui-bg-surface) !important;
+}
+
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="bg-neutral-850"],
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="bg-neutral-800"] {
+  background-color: var(--ui-bg-surface-active) !important;
+}
+
+/* All borders */
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="border-neutral-800"],
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="border-neutral-700"] {
+  border-color: var(--ui-border-subtle) !important;
+}
+
+/* All text colors */
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="text-neutral-100"],
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="text-neutral-200"],
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="text-\[\#f4f4f5\]"] {
+  color: var(--ui-text-primary) !important;
+}
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="text-neutral-300"],
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="text-neutral-400"] {
+  color: var(--ui-text-secondary) !important;
+}
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="text-neutral-500"] {
+  color: var(--ui-text-muted) !important;
+}
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="text-neutral-600"] {
+  color: var(--ui-text-dim) !important;
+}
+
+/* Keyboard chips */
+.theme-light kbd {
+  background-color: #f3efe7 !important;
+  border-color: #d4ccbe !important;
+  color: #1c1917 !important;
+}
+
+/* Inputs & Search */
+.theme-light input[type="text"],
+.theme-light input[type="search"],
+.theme-light input[type="number"],
+.theme-light textarea,
+.theme-light select {
+  background-color: #ffffff !important;
+  color: #1c1917 !important;
+  border-color: #d4ccbe !important;
+}
+.theme-light input::placeholder,
+.theme-light textarea::placeholder {
+  color: #a8a29e !important;
+}
+
+/* Dock buttons */
+.theme-light nav button {
+  color: var(--ui-text-secondary) !important;
+}
+.theme-light nav button:hover {
+  background-color: var(--ui-bg-surface-elevated) !important;
+  color: var(--ui-text-primary) !important;
+}
+.theme-light nav button.bg-neutral-800 {
+  background-color: var(--ui-bg-surface-active) !important;
+  color: var(--ui-text-primary) !important;
+}
+
+/* Generic button hovers in Light Mode */
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="hover:bg-neutral-800"]:hover,
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="hover:bg-neutral-850"]:hover,
+.theme-light :not(.projection-canvas, .projection-canvas *)[class*="hover:bg-neutral-900"]:hover {
+  background-color: var(--ui-bg-surface-elevated) !important;
+  color: var(--ui-text-primary) !important;
+}
+
+/* Light Mode Alert & Tag Badges */
+.theme-light .bg-emerald-950\/40,
+.theme-light .bg-emerald-950\/50,
+.theme-light .bg-emerald-950\/60 {
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+  border-color: #a7f3d0 !important;
+}
+.theme-light .bg-amber-950\/40,
+.theme-light .bg-amber-950\/60 {
+  background-color: #fffbeb !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+.theme-light .bg-red-950\/40,
+.theme-light .bg-red-950\/80 {
+  background-color: #fef2f2 !important;
+  color: #991b1b !important;
+  border-color: #fecaca !important;
+}
+.theme-light .bg-indigo-950\/40,
+.theme-light .bg-indigo-950\/60 {
+  background-color: #eef2ff !important;
+  color: #3730a3 !important;
+  border-color: #c7d2fe !important;
+}
+
+/* Popover in Light Mode */
+.theme-light .bg-neutral-900.border-neutral-700\/80 {
+  background-color: #ffffff !important;
+  border-color: #e5dfd3 !important;
+  box-shadow: 0 20px 25px -5px rgba(28, 25, 23, 0.08), 0 8px 10px -6px rgba(28, 25, 23, 0.05) !important;
+}

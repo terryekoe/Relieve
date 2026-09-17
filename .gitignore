@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Production & Build outputs
+/build
+/.svelte-kit
+/package
+/dist
+
+# Tauri & Rust artifacts
+/src-tauri/target
+/target
+src-tauri/gen/schemas
+
+# Whisper model weights (binary files exceed GitHub 100MB limit, downloaded on-demand)
+src-tauri/resources/models/*.bin
+src-tauri/resources/models/*.download
+resources/models/*.bin
+
+# Environment & local files
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

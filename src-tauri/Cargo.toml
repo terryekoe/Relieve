@@ -1,0 +1,38 @@
+[package]
+name = "relieve"
+version = "1.0.0"
+description = "Speech-Driven Church Scripture Presentation App"
+authors = ["Terry Ekoe"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "relieve_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.33", features = ["bundled"] }
+cpal = "0.15"
+regex = "1.11"
+once_cell = "1.20"
+tokio = { version = "1", features = ["sync", "rt-multi-thread"] }
+whisper-rs = "0.16.0"
+ureq = "2.12"
+strsim = "0.11.1"
+
+
+# Read the optimization guideline for more details: https://tauri.app/concept/size/#cargo-configuration
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
