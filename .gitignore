@@ -14,10 +14,12 @@ node_modules
 /target
 src-tauri/gen/schemas
 
-# Whisper model weights (binary files exceed GitHub 100MB limit, downloaded on-demand)
+# Whisper model weights & SQLite database binaries (bundled directly into installers & releases)
 src-tauri/resources/models/*.bin
 src-tauri/resources/models/*.download
 resources/models/*.bin
+src-tauri/resources/*.db
+resources/*.db
 
 # Environment & local files
 .env
