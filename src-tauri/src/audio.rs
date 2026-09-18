@@ -151,8 +151,8 @@ impl AudioEngine {
                                                     .unwrap_or_default();
 
                                                 if let Ok(mut buf) = speech_for_worker.lock() {
-                                                    // Condition 1: Natural end-of-utterance pause of >= 450ms after speaking at least 0.5s (8,000 samples)
-                                                    if elapsed >= Duration::from_millis(450) && buf.len() >= 8000 {
+                                                    // Condition 1: Natural end-of-utterance pause of >= 450ms after speaking at least 0.6s (9,600 samples)
+                                                    if elapsed >= Duration::from_millis(450) && buf.len() >= 9600 {
                                                         samples_to_transcribe = buf.clone();
                                                         buf.clear();
                                                         is_speaking_for_worker.store(false, Ordering::SeqCst);
@@ -166,6 +166,11 @@ impl AudioEngine {
                                                         let tail = buf[start_idx..].to_vec();
                                                         *buf = tail;
                                                     }
+                                                    // Condition 3: Discard transient noise clicks/breaths (< 0.6s) if pause exceeds 650ms
+                                                    else if elapsed >= Duration::from_millis(650) && buf.len() < 9600 {
+                                                        buf.clear();
+                                                        is_speaking_for_worker.store(false, Ordering::SeqCst);
+                                                    }
                                                 }
                                             }
 
@@ -177,8 +182,8 @@ impl AudioEngine {
                                                 }
                                                 let buffer_rms = (sum_sq / samples_to_transcribe.len() as f32).sqrt();
 
-                                                // If the accumulated buffer has voice energy (>= 0.010 RMS), transcribe it
-                                                if buffer_rms >= 0.010 {
+                                                // If the accumulated buffer has voice energy (>= 0.015 RMS and >= 9600 samples), transcribe it
+                                                if buffer_rms >= 0.015 && samples_to_transcribe.len() >= 9600 {
                                                     let dur_sec = samples_to_transcribe.len() as f32 / 16000.0;
                                                     println!("[Audio Engine] Transcribing {:.2}s utterance (RMS: {:.4})...", dur_sec, buffer_rms);
                                                     if let Ok(text) = stt_clone.transcribe_16khz(&samples_to_transcribe) {
@@ -255,8 +260,8 @@ impl AudioEngine {
                                         }
                                     }
 
-                                    // 3. VAD Thresholding: calibrated for clear voice sensitivity without clipping quiet consonants
-                                    let vad_active = rms > 0.012;
+                                    // 3. VAD Thresholding: calibrated for voice sensitivity while ignoring room noise and breathing
+                                    let vad_active = rms > 0.018;
 
                                     if vad_active {
                                         if let Ok(mut t) = speech_time_for_stream.lock() {

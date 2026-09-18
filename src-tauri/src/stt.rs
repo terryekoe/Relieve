@@ -66,10 +66,10 @@ impl SpeechTranscriber {
         }
         let rms = (sum_sq / audio_samples.len() as f32).sqrt();
 
-        // Real human speech into a mic has sustained RMS >= 0.009 and Peak >= 0.022.
+        // Real human speech into a mic has sustained RMS >= 0.014 and Peak >= 0.035.
         // If the buffer is just ambient room hiss, breathing, or fan noise, drop it immediately
         // without waking Whisper.
-        if rms < 0.009 || peak < 0.022 {
+        if rms < 0.014 || peak < 0.035 {
             return Ok(String::new());
         }
 
@@ -104,10 +104,12 @@ impl SpeechTranscriber {
         // Lock temperature to 0.0 and disable progressive loosening/fallback retries
         params.set_temperature(0.0);
         params.set_temperature_inc(0.0);
-        params.set_no_speech_thold(0.5);
+        // Aggressive no-speech threshold (0.65) to suppress decoding on ambient room noise
+        params.set_no_speech_thold(0.65);
 
-        // Natural scripture language conditioning prompt to bias Whisper toward Bible domain and citation syntax
-        params.set_initial_prompt("Holy Bible. John chapter three verse sixteen. Matthew 6:33. Romans chapter eight verse twenty-eight. First Corinthians thirteen. Psalm 23. Genesis. Hebrews chapter eleven verse one.");
+        // Domain conditioning prompt: primes Whisper on Bible citation syntax WITHOUT priming
+        // specific book names or numbers (prevents hallucinating 'Psalm 23' on quiet audio)
+        params.set_initial_prompt("The following is a Scripture reading, church sermon, chapter, and verse citations: Book chapter, verses, numbers.");
 
         let mut state = self
             .state
@@ -123,8 +125,8 @@ impl SpeechTranscriber {
         for i in 0..num_segments {
             if let Some(seg) = state.get_segment(i) {
                 // Whisper produces an explicit no-speech probability per segment.
-                // If Whisper is not confident that speech was actually present (> 0.50), discard the segment!
-                if seg.no_speech_probability() > 0.50 {
+                // If Whisper is not confident that speech was actually present (> 0.40), discard the segment!
+                if seg.no_speech_probability() > 0.40 {
                     continue;
                 }
                 if let Ok(s) = seg.to_str_lossy() {
@@ -141,6 +143,27 @@ impl SpeechTranscriber {
             || (clean.starts_with('[') && clean.ends_with(']'))
             || (clean.starts_with('*') && clean.ends_with('*'))
         {
+            return Ok(String::new());
+        }
+
+        // Reject common Whisper silence hallucinations
+        let lower_clean = clean.to_lowercase();
+        let stripped_clean = lower_clean.trim_matches(|c: char| !c.is_alphanumeric());
+        if matches!(
+            stripped_clean,
+            "thank you"
+                | "thank you very much"
+                | "thank you for watching"
+                | "thanks for watching"
+                | "silence"
+                | "subtitles by"
+                | "subscribe"
+                | "you"
+                | "bye"
+                | "goodbye"
+                | "the end"
+                | "watching"
+        ) {
             return Ok(String::new());
         }
 
@@ -319,6 +342,11 @@ mod tests {
             let hiss = vec![0.006f32; 16000];
             let res_hiss = stt.transcribe_16khz(&hiss).expect("Should succeed");
             assert_eq!(res_hiss, "", "Low-level noise floor must return empty transcript");
+
+            // 3. Moderate room ambient noise / breathing (peak ~0.025, RMS ~0.012) must be dropped by pre-inference gate
+            let room_noise = vec![0.012f32; 16000];
+            let res_room = stt.transcribe_16khz(&room_noise).expect("Should succeed");
+            assert_eq!(res_room, "", "Moderate ambient noise must return empty transcript without triggering Whisper");
         }
     }
 }

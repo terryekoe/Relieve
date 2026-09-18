@@ -63,14 +63,17 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         // Genesis
         ("genesis", "Genesis"), ("gen", "Genesis"), ("genisis", "Genesis"),
         ("jenesis", "Genesis"), ("djenesis", "Genesis"), ("genese", "Genesis"),
+        ("dgenesis", "Genesis"), ("geneses", "Genesis"),
 
         // Exodus
         ("exodus", "Exodus"), ("exo", "Exodus"), ("exodous", "Exodus"),
         ("eksodus", "Exodus"), ("exodos", "Exodus"), ("eksodos", "Exodus"),
+        ("exudo", "Exodus"), ("exoduz", "Exodus"),
 
         // Leviticus
         ("leviticus", "Leviticus"), ("lev", "Leviticus"), ("levitikus", "Leviticus"),
         ("leviticos", "Leviticus"), ("lebiticus", "Leviticus"), ("libiticus", "Leviticus"),
+        ("levitcus", "Leviticus"), ("leviticaz", "Leviticus"),
 
         // Numbers
         ("numbers", "Numbers"), ("num", "Numbers"), ("numbas", "Numbers"),
@@ -79,6 +82,7 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         // Deuteronomy
         ("deuteronomy", "Deuteronomy"), ("deut", "Deuteronomy"), ("deutronomy", "Deuteronomy"),
         ("duteronomy", "Deuteronomy"), ("dutronomy", "Deuteronomy"), ("diutronomy", "Deuteronomy"),
+        ("dutranomy", "Deuteronomy"), ("diuteronomy", "Deuteronomy"), ("deuteronomi", "Deuteronomy"),
 
         // Joshua
         ("joshua", "Joshua"), ("josh", "Joshua"), ("yoshua", "Joshua"), ("joshuwa", "Joshua"),
@@ -162,6 +166,7 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         // Ecclesiastes
         ("ecclesiastes", "Ecclesiastes"), ("ecc", "Ecclesiastes"), ("ecclesiastis", "Ecclesiastes"),
         ("eklesiastes", "Ecclesiastes"), ("eklizyastis", "Ecclesiastes"), ("eclesiastes", "Ecclesiastes"),
+        ("eccleciastes", "Ecclesiastes"), ("eklesiastis", "Ecclesiastes"),
 
         // Song of Solomon
         ("song of solomon", "Song of Solomon"), ("song of songs", "Song of Solomon"),
@@ -209,6 +214,7 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         // Habakkuk
         ("habakkuk", "Habakkuk"), ("hab", "Habakkuk"), ("habakuk", "Habakkuk"),
         ("habakook", "Habakkuk"), ("habacock", "Habakkuk"),
+        ("habacuc", "Habakkuk"), ("habacook", "Habakkuk"), ("habakkook", "Habakkuk"),
 
         // Zephaniah
         ("zephaniah", "Zephaniah"), ("zep", "Zephaniah"), ("zefanaya", "Zephaniah"),
@@ -230,7 +236,8 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         // ==========================================
         // Matthew
         ("matthew", "Matthew"), ("matt", "Matthew"), ("mathew", "Matthew"),
-        ("matiu", "Matthew"), ("matew", "Matthew"),
+        ("matiu", "Matthew"), ("matew", "Matthew"), ("matchew", "Matthew"),
+        ("machew", "Matthew"), ("mathiew", "Matthew"), ("mathieu", "Matthew"),
 
         // Mark
         ("mark", "Mark"), ("mrk", "Mark"), ("mak", "Mark"), ("maak", "Mark"),
@@ -257,6 +264,7 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         ("fist corinthians", "1 Corinthians"), ("first korinthians", "1 Corinthians"),
         ("first korinteans", "1 Corinthians"), ("first corinteans", "1 Corinthians"),
         ("first colinthians", "1 Corinthians"), ("1 colinthians", "1 Corinthians"),
+        ("first korintians", "1 Corinthians"), ("1 korintians", "1 Corinthians"),
         ("corinthians 1", "1 Corinthians"),
 
         // 2 Corinthians
@@ -265,71 +273,79 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         ("seken corinthians", "2 Corinthians"), ("sekond corinthians", "2 Corinthians"),
         ("second korinthians", "2 Corinthians"), ("second korinteans", "2 Corinthians"),
         ("second colinthians", "2 Corinthians"), ("2 colinthians", "2 Corinthians"),
+        ("second korintians", "2 Corinthians"), ("2 korintians", "2 Corinthians"),
         ("corinthians 2", "2 Corinthians"),
 
         // Single-mention Corinthians (defaults to 1 Corinthians if speaker omitted prefix)
         ("corinthians", "1 Corinthians"), ("corinthian", "1 Corinthians"),
         ("korinthians", "1 Corinthians"), ("korinteans", "1 Corinthians"),
         ("colinthians", "1 Corinthians"), ("colinthian", "1 Corinthians"),
+        ("korintians", "1 Corinthians"), ("corintians", "1 Corinthians"),
 
         // Galatians
         ("galatians", "Galatians"), ("gal", "Galatians"), ("galatian", "Galatians"),
         ("galashians", "Galatians"), ("galatia", "Galatians"), ("galasian", "Galatians"),
+        ("galashia", "Galatians"), ("galashins", "Galatians"),
 
         // Ephesians
         ("ephesians", "Ephesians"), ("eph", "Ephesians"), ("ephesian", "Ephesians"),
         ("efisians", "Ephesians"), ("efesians", "Ephesians"),
+        ("evesians", "Ephesians"), ("effisians", "Ephesians"), ("efisian", "Ephesians"),
 
         // Philippians
         ("philippians", "Philippians"), ("phil", "Philippians"), ("philipians", "Philippians"),
         ("philippian", "Philippians"), ("philipian", "Philippians"), ("filipians", "Philippians"),
-        ("filipian", "Philippians"),
+        ("filipian", "Philippians"), ("filipins", "Philippians"), ("philipins", "Philippians"),
 
         // Colossians
         ("colossians", "Colossians"), ("col", "Colossians"), ("colossian", "Colossians"),
         ("colosians", "Colossians"), ("kolosians", "Colossians"), ("koloshians", "Colossians"),
+        ("colocians", "Colossians"), ("koloshens", "Colossians"), ("coloshens", "Colossians"),
 
         // 1 Thessalonians
         ("1 thessalonians", "1 Thessalonians"), ("1 thess", "1 Thessalonians"), ("1st thessalonians", "1 Thessalonians"),
         ("first thessalonians", "1 Thessalonians"), ("first thess", "1 Thessalonians"),
         ("fess thessalonians", "1 Thessalonians"), ("first tesalonians", "1 Thessalonians"),
         ("first thesalonians", "1 Thessalonians"), ("fess thess", "1 Thessalonians"),
-        ("thessalonians 1", "1 Thessalonians"),
+        ("first tessalonians", "1 Thessalonians"), ("thessalonians 1", "1 Thessalonians"),
 
         // 2 Thessalonians
         ("2 thessalonians", "2 Thessalonians"), ("2 thess", "2 Thessalonians"), ("2nd thessalonians", "2 Thessalonians"),
         ("second thessalonians", "2 Thessalonians"), ("second thess", "2 Thessalonians"),
         ("seken thessalonians", "2 Thessalonians"), ("second tesalonians", "2 Thessalonians"),
         ("second thesalonians", "2 Thessalonians"), ("seken thess", "2 Thessalonians"),
-        ("thessalonians 2", "2 Thessalonians"),
+        ("second tessalonians", "2 Thessalonians"), ("thessalonians 2", "2 Thessalonians"),
 
         // Single-mention Thessalonians (defaults to 1 Thessalonians)
         ("thessalonians", "1 Thessalonians"), ("thessalonian", "1 Thessalonians"),
-        ("tesalonians", "1 Thessalonians"),
+        ("tesalonians", "1 Thessalonians"), ("tessalonians", "1 Thessalonians"),
 
         // 1 Timothy
         ("1 timothy", "1 Timothy"), ("1 tim", "1 Timothy"), ("1st timothy", "1 Timothy"),
         ("first timothy", "1 Timothy"), ("first tim", "1 Timothy"),
         ("fess timothy", "1 Timothy"), ("fess tim", "1 Timothy"),
-        ("first timoty", "1 Timothy"), ("timothy 1", "1 Timothy"),
+        ("first timoty", "1 Timothy"), ("first timoti", "1 Timothy"), ("timothy 1", "1 Timothy"),
 
         // 2 Timothy
         ("2 timothy", "2 Timothy"), ("2 tim", "2 Timothy"), ("2nd timothy", "2 Timothy"),
         ("second timothy", "2 Timothy"), ("second tim", "2 Timothy"),
         ("seken timothy", "2 Timothy"), ("seken tim", "2 Timothy"),
-        ("second timoty", "2 Timothy"), ("timothy 2", "2 Timothy"),
+        ("second timoty", "2 Timothy"), ("second timoti", "2 Timothy"), ("timothy 2", "2 Timothy"),
 
         // Single-mention Timothy (defaults to 1 Timothy)
         ("timothy", "1 Timothy"), ("timoty", "1 Timothy"), ("timoti", "1 Timothy"),
+        ("timotee", "1 Timothy"), ("timmothy", "1 Timothy"),
 
         // Titus
-        ("titus", "Titus"), ("tit", "Titus"), ("taiturs", "Titus"), ("titos", "Titus"), ("taitus", "Titus"),
+        ("titus", "Titus"), ("tit", "Titus"), ("taiturs", "Titus"), ("titos", "Titus"),
+        ("taitus", "Titus"), ("taituz", "Titus"),
 
         // Philemon
         ("philemon", "Philemon"), ("phm", "Philemon"), ("filemon", "Philemon"), ("filimon", "Philemon"),
 
         // Hebrews
         ("hebrews", "Hebrews"), ("heb", "Hebrews"), ("hebrew", "Hebrews"), ("hebru", "Hebrews"),
+        ("hebrus", "Hebrews"), ("ebrus", "Hebrews"), ("hibru", "Hebrews"), ("hibrews", "Hebrews"),
 
         // James
         ("james", "James"), ("jas", "James"), ("jemz", "James"), ("jeims", "James"), ("jems", "James"),
@@ -371,6 +387,7 @@ static BOOK_ALIASES: Lazy<HashMap<String, &'static str>> = Lazy::new(|| {
         // Revelation
         ("revelation", "Revelation"), ("revelations", "Revelation"), ("rev", "Revelation"),
         ("revelasion", "Revelation"), ("revelashuns", "Revelation"),
+        ("reveleshon", "Revelation"), ("revalation", "Revelation"), ("revalations", "Revelation"),
     ];
 
     for (k, v) in mappings {
@@ -386,6 +403,11 @@ static PHONETIC_TERMS_RE: Lazy<Vec<(Regex, &'static str)>> = Lazy::new(|| {
         ("capter", "chapter"),
         ("chaptar", "chapter"),
         ("chapt", "chapter"),
+        ("chapte", "chapter"),
+        ("capta", "chapter"),
+        ("captah", "chapter"),
+        ("saptar", "chapter"),
+        ("sapta", "chapter"),
         ("verses", "verse"),
         ("versus", "verse"),
         ("veses", "verse"),
@@ -394,6 +416,14 @@ static PHONETIC_TERMS_RE: Lazy<Vec<(Regex, &'static str)>> = Lazy::new(|| {
         ("vas", "verse"),
         ("vers", "verse"),
         ("vase", "verse"),
+        ("vest", "verse"),
+        ("vests", "verse"),
+        ("versis", "verse"),
+        ("vases", "verse"),
+        ("vass", "verse"),
+        ("ferse", "verse"),
+        ("farse", "verse"),
+        ("fesses", "verse"),
     ];
     terms
         .into_iter()
@@ -417,12 +447,20 @@ static BASE_NUMBERS_RE: Lazy<Vec<(Regex, &'static str)>> = Lazy::new(|| {
 
 static CONTEXTUAL_NUMERALS_RE: Lazy<Vec<(Regex, &'static str)>> = Lazy::new(|| {
     let contextual = [
+        (r"(?i)\bchapter\s+(\d+)\s+(?:first|fast|fess|fes)\s+(\d+)\b", "chapter $1 verse $2"),
         (r"(?i)\b(chapter|verse|verses)\s+tree\b", "$1 3"),
         (r"(?i)\b(chapter|verse|verses)\s+eat\b", "$1 8"),
         (r"(?i)\b(chapter|verse|verses)\s+ate\b", "$1 8"),
         (r"(?i)\b(chapter|verse|verses)\s+won\b", "$1 1"),
         (r"(?i)\b(chapter|verse|verses)\s+too\b", "$1 2"),
         (r"(?i)\b(chapter|verse|verses)\s+for\b", "$1 4"),
+        (r"(?i)\b(chapter|verse|verses)\s+fout\b", "$1 4"),
+        (r"(?i)\b(chapter|verse|verses)\s+fift\b", "$1 5"),
+        (r"(?i)\b(chapter|verse|verses)\s+tin\b", "$1 10"),
+        (r"(?i)\b(chapter|verse|verses)\s+tent\b", "$1 10"),
+        (r"(?i)\b(chapter|verse|verses)\s+tirty\b", "$1 30"),
+        (r"(?i)\b(chapter|verse|verses)\s+foti\b", "$1 40"),
+        (r"(?i)\b(chapter|verse|verses)\s+fiti\b", "$1 50"),
         (r"(?i)\b(chapter|verse|verses)\s+first\b", "$1 1"),
         (r"(?i)\b(chapter|verse|verses)\s+second\b", "$1 2"),
         (r"(?i)\b(chapter|verse|verses)\s+third\b", "$1 3"),
@@ -451,10 +489,26 @@ pub fn clean_spoken_transcript(input: &str) -> String {
     let colons_fixed = semi_re.replace_all(&dash_std, "$1:$2");
 
     // 4. Strip church filler and noise phrases (prevalent in West African/Ghanaian sermons)
-    let mut text_lower = colons_fixed.to_lowercase();
+    let mut text_lower = colons_fixed
+        .to_lowercase()
+        .replace("mat-chew", "matthew")
+        .replace("mat chew", "matthew");
     for noise in [
+        "if you have your bibles turn to the book of",
+        "if you have your bibles turn to",
+        "if you have your bibles please turn to",
+        "if you have your bibles open to the book of",
+        "if you have your bibles open to",
+        "if you have your bible turn to the book of",
+        "if you have your bible turn to",
+        "if you have your bible open to the book of",
+        "if you have your bible open to",
+        "turn your bibles please to the book of",
+        "turn your bibles please to",
         "turn with me to the book of",
         "turn with me to",
+        "turn with us to the book of",
+        "turn with us to",
         "let us turn with me to",
         "let us turn to the book of",
         "let us turn to",
@@ -472,6 +526,12 @@ pub fn clean_spoken_transcript(input: &str) -> String {
         "let us open our bible to",
         "let us open to the book of",
         "let us open to",
+        "let's open our bibles to the book of",
+        "let's open our bibles to",
+        "let's open our bible to the book of",
+        "let's open our bible to",
+        "let's open to the book of",
+        "let's open to",
         "open your bibles to the book of",
         "open your bibles to",
         "open your bible to the book of",
@@ -493,10 +553,32 @@ pub fn clean_spoken_transcript(input: &str) -> String {
         "shall we turn to",
         "look at the book of",
         "look at",
+        "let us look at the book of",
+        "let us look at",
+        "let's look at the book of",
+        "let's look at",
+        "we are looking at the book of",
+        "we are looking at",
         "to the book of",
         "the book of",
         "the epistle of",
         "the gospel of",
+        "taking our reading from the book of",
+        "taking our reading from",
+        "taking our scripture from the book of",
+        "taking our scripture from",
+        "our scripture reading today is from the book of",
+        "our scripture reading today is from",
+        "our scripture reading is from the book of",
+        "our scripture reading is from",
+        "our text today is taken from the book of",
+        "our text today is taken from",
+        "our text is taken from the book of",
+        "our text is taken from",
+        "our text is from the book of",
+        "our text is from",
+        "taken from the book of",
+        "taken from",
         "we are reading from the book of",
         "we are reading from",
         "reading from the book of",
@@ -658,6 +740,11 @@ pub fn normalize_spoken_numbers(input: &str) -> String {
     // 2. Phonetic word corrections for liturgical terminology
     for (re, to) in PHONETIC_TERMS_RE.iter() {
         text = re.replace_all(&text, *to).to_string();
+    }
+
+    // 2b. Contextual chapter/verse phonetic fixes (e.g. "chapter 3 first 16" -> "chapter 3 verse 16")
+    for (re, rep) in CONTEXTUAL_NUMERALS_RE.iter() {
+        text = re.replace_all(&text, *rep).to_string();
     }
 
     // 3. Ordinal prefixes for numbered books
@@ -1414,5 +1501,78 @@ mod tests {
         assert_eq!(parsed_ob.chapter, 1);
         assert_eq!(parsed_ob.verse_start, 3);
         assert_eq!(parsed_ob.verse_end, Some(4));
+    }
+
+    #[test]
+    fn test_spoken_mishearings_and_accents() {
+        // "chapter 3 first 16" (Whisper hears 'first' instead of 'verse')
+        let p1 = parse_spoken_scripture("turn to John chapter 3 first 16").expect("Should detect John 3:16 with 'first' as verse");
+        assert_eq!(p1.book, "John");
+        assert_eq!(p1.chapter, 3);
+        assert_eq!(p1.verse_start, 16);
+
+        // "mat-chew 6 33"
+        let p2 = parse_spoken_scripture("mat-chew 6 33").expect("Should detect Matthew 6:33 with 'mat-chew'");
+        assert_eq!(p2.book, "Matthew");
+        assert_eq!(p2.chapter, 6);
+        assert_eq!(p2.verse_start, 33);
+
+        // "filipians for 13"
+        let p3 = parse_spoken_scripture("filipians for 13").expect("Should detect Philippians 4:13 with 'filipians'");
+        assert_eq!(p3.book, "Philippians");
+        assert_eq!(p3.chapter, 4);
+        assert_eq!(p3.verse_start, 13);
+
+        // "first korintians 13 4"
+        let p4 = parse_spoken_scripture("first korintians 13 4").expect("Should detect 1 Corinthians 13:4 with 'korintians'");
+        assert_eq!(p4.book, "1 Corinthians");
+        assert_eq!(p4.chapter, 13);
+        assert_eq!(p4.verse_start, 4);
+
+        // "kolosians 3 23"
+        let p5 = parse_spoken_scripture("kolosians 3 23").expect("Should detect Colossians 3:23 with 'kolosians'");
+        assert_eq!(p5.book, "Colossians");
+        assert_eq!(p5.chapter, 3);
+        assert_eq!(p5.verse_start, 23);
+
+        // "habakuk 2 4"
+        let p6 = parse_spoken_scripture("habakuk 2 4").expect("Should detect Habakkuk 2:4 with 'habakuk'");
+        assert_eq!(p6.book, "Habakkuk");
+        assert_eq!(p6.chapter, 2);
+        assert_eq!(p6.verse_start, 4);
+
+        // "revelations 21 4"
+        let p7 = parse_spoken_scripture("revelations 21 4").expect("Should detect Revelation 21:4 with plural 'revelations'");
+        assert_eq!(p7.book, "Revelation");
+        assert_eq!(p7.chapter, 21);
+        assert_eq!(p7.verse_start, 4);
+
+        // "dutronomy 28 1"
+        let p8 = parse_spoken_scripture("dutronomy 28 1").expect("Should detect Deuteronomy 28:1 with 'dutronomy'");
+        assert_eq!(p8.book, "Deuteronomy");
+        assert_eq!(p8.chapter, 28);
+        assert_eq!(p8.verse_start, 1);
+
+        // "eklesiastes 3 1"
+        let p9 = parse_spoken_scripture("eklesiastes 3 1").expect("Should detect Ecclesiastes 3:1 with 'eklesiastes'");
+        assert_eq!(p9.book, "Ecclesiastes");
+        assert_eq!(p9.chapter, 3);
+        assert_eq!(p9.verse_start, 1);
+
+        // Pulpit phrases:
+        let p10 = parse_spoken_scripture("if you have your bibles turn to John 3 16").expect("Should handle 'if you have your bibles turn to'");
+        assert_eq!(p10.book, "John");
+        assert_eq!(p10.chapter, 3);
+        assert_eq!(p10.verse_start, 16);
+
+        let p11 = parse_spoken_scripture("our scripture reading today is from Romans 8 28").expect("Should handle 'our scripture reading today is from'");
+        assert_eq!(p11.book, "Romans");
+        assert_eq!(p11.chapter, 8);
+        assert_eq!(p11.verse_start, 28);
+
+        let p12 = parse_spoken_scripture("taking our reading from Matthew chapter 6 verse 33").expect("Should handle 'taking our reading from'");
+        assert_eq!(p12.book, "Matthew");
+        assert_eq!(p12.chapter, 6);
+        assert_eq!(p12.verse_start, 33);
     }
 }
