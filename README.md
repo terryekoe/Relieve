@@ -38,13 +38,26 @@
 
 ---
 
-## 🚀 Installation & Setup
+## 🚀 Installation & Downloads
+
+### Download Official Releases
+Visit the [Releases Page](https://github.com/terryekoe/Relieve/releases/latest) to download the latest installer for your operating system:
+
+| Platform | Format | Description |
+|---|---|---|
+| **macOS** | [`.dmg`](https://github.com/terryekoe/Relieve/releases/latest) | Native Apple Silicon & Intel universal disk image with drag-and-drop installer |
+| **Windows** | [`.exe` (NSIS Setup)](https://github.com/terryekoe/Relieve/releases/latest) | Standard Windows 10/11 64-bit setup executable |
+| **Windows** | [`.msi`](https://github.com/terryekoe/Relieve/releases/latest) | Windows enterprise installer package |
+
+---
+
+## 🛠️ Development & Building from Source
 
 ### Requirements
-- **macOS** 11+ (Intel or Apple Silicon)
+- **macOS** 11+ or **Windows 10/11** (64-bit)
 - **Node.js** 18+ and `npm`
 - **Rust** 1.75+ and `cargo`
-- CMake (for compiling whisper.cpp)
+- **CMake** (for building embedded whisper.cpp)
 
 ### Development
 ```bash
@@ -61,10 +74,11 @@ npm run tauri dev
 
 ### Production Build
 ```bash
+# Build native installer for the current OS
 npm run tauri build
 ```
-The compiled macOS `.dmg` and `.app` bundles will be located in:
-`src-tauri/target/release/bundle/dmg/Relieve_1.0.0_x64.dmg`
+- On **macOS**: Generates `Relieve_1.0.0_x64.dmg` and `Relieve.app`.
+- On **Windows**: Generates `Relieve_1.0.0_x64-setup.exe` and `Relieve_1.0.0_x64_en-US.msi`.
 
 ---
 
