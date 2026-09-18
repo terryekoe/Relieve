@@ -625,6 +625,34 @@ pub fn get_system_fonts() -> Vec<String> {
         }
     }
 
+    #[cfg(target_os = "windows")]
+    {
+        let windir = std::env::var("WINDIR").unwrap_or_else(|_| "C:\\Windows".to_string());
+        let font_dir = std::path::Path::new(&windir).join("Fonts");
+        if let Ok(entries) = std::fs::read_dir(font_dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if let Some(stem) = path.file_stem().and_then(|s| s.to_str()) {
+                    let clean_name = stem
+                        .trim_end_matches(" Regular")
+                        .trim_end_matches(" Bold")
+                        .trim_end_matches(" Italic")
+                        .trim_end_matches(" Medium")
+                        .trim_end_matches(" Light")
+                        .trim_end_matches(" Black")
+                        .trim_end_matches(" Thin")
+                        .trim_end_matches(" SemiBold")
+                        .trim_end_matches(" ExtraBold")
+                        .trim();
+
+                    if !clean_name.is_empty() && !clean_name.starts_with('.') && clean_name.len() > 2 {
+                        fonts.insert(clean_name.to_string());
+                    }
+                }
+            }
+        }
+    }
+
     fonts.into_iter().collect()
 }
 
